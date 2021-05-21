@@ -28,9 +28,15 @@ let forecastOneUv = document.querySelector("#forecastOneUv")
 let forecastTwoUv = document.querySelector("#forecastTwoUv")
 let forecastThreeUv = document.querySelector("#forecastThreeUv")
 let forecastFourUv = document.querySelector("#forecastFourUv")
+let forecastZeroDate = document.querySelector("#forecastZeroDate")
+let forecastOneDate = document.querySelector("#forecastOneDate")
+let forecastTwoDate = document.querySelector("#forecastTwoDate")
+let forecastThreeDate = document.querySelector("#forecastThreeDate")
+let forecastFourDate = document.querySelector("#forecastFourDate")
 
-const DateTime = luxon.DateTime;
-let today = DateTime.local().toLocaleString(DateTime.DATE_HUGE);
+let dateTime = luxon.DateTime;
+let dt = dateTime.now();
+let today = dateTime.local().toLocaleString(dateTime.DATE_HUGE);
 let date = document.querySelector("#currentDay");
 date.textContent = today;
 
@@ -42,7 +48,6 @@ var zipSubmitHandler = function (event) {
         getWeather(zipCode);
         results.style.display = "block";
         previousSearches.style.display = 'block';
-        
         zipInput.value = '';
     } else {
         alert('Please enter a valid zip');
@@ -90,27 +95,32 @@ function getForecast(latitude, longitude) {
         .then(function (data) {
             console.log('Fetch Response \n-----------');
             console.log(data)
+            forecastZeroDate.textContent = dateTime.now().plus({ days: 1 }).toLocaleString(dateTime.DATE_HUGE);
+            forecastOneDate.textContent = dateTime.now().plus({ days: 2 }).toLocaleString(dateTime.DATE_HUGE);
+            forecastTwoDate.textContent = dateTime.now().plus({ days: 3 }).toLocaleString(dateTime.DATE_HUGE);
+            forecastThreeDate.textContent = dateTime.now().plus({ days: 4 }).toLocaleString(dateTime.DATE_HUGE);
+            forecastFourDate.textContent = dateTime.now().plus({ days: 5 }).toLocaleString(dateTime.DATE_HUGE);
             currentUv.textContent = "UV Index: " + data.current.uvi;
-            forecastZeroTemp.textContent = "Temp: " + data.daily[0].temp.max
-            forecastOneTemp.textContent = "Temp: " + data.daily[1].temp.max
-            forecastTwoTemp.textContent = "Temp: " + data.daily[2].temp.max
-            forecastThreeTemp.textContent = "Temp: " + data.daily[3].temp.max
-            forecastFourTemp.textContent = "Temp: " + data.daily[4].temp.max
-            forecastZeroWind.textContent = "Wind: " + data.daily[0].wind_speed + " MPH";
-            forecastOneWind.textContent = "Wind: " + data.daily[1].wind_speed + " MPH";
-            forecastTwoWind.textContent = "Wind: " + data.daily[2].wind_speed + " MPH";
-            forecastThreeWind.textContent = "Wind: " + data.daily[3].wind_speed + " MPH";
-            forecastFourWind.textContent = "Wind: " + data.daily[4].wind_speed + " MPH";
-            forecastZeroHumidity.textContent = "Humidity: " + data.daily[0].humidity + "%";
-            forecastOneHumidity.textContent = "Humidity: " + data.daily[1].humidity + "%";
-            forecastTwoHumidity.textContent = "Humidity: " + data.daily[2].humidity + "%";
-            forecastThreeHumidity.textContent = "Humidity: " + data.daily[3].humidity + "%";
-            forecastFourHumidity.textContent = "Humidity: " + data.daily[4].humidity + "%";
-            forecastZeroUv.textContent = "UV Index: " + data.daily[0].uvi
-            forecastOneUv.textContent = "UV Index: " + data.daily[1].uvi
-            forecastTwoUv.textContent = "UV Index: " + data.daily[2].uvi
-            forecastThreeUv.textContent = "UV Index: " + data.daily[3].uvi
-            forecastFourUv.textContent = "UV Index: " + data.daily[4].uvi
+            forecastZeroTemp.textContent = "Temp: " + data.daily[1].temp.max
+            forecastOneTemp.textContent = "Temp: " + data.daily[2].temp.max
+            forecastTwoTemp.textContent = "Temp: " + data.daily[3].temp.max
+            forecastThreeTemp.textContent = "Temp: " + data.daily[4].temp.max
+            forecastFourTemp.textContent = "Temp: " + data.daily[5].temp.max
+            forecastZeroWind.textContent = "Wind: " + data.daily[1].wind_speed + " MPH";
+            forecastOneWind.textContent = "Wind: " + data.daily[2].wind_speed + " MPH";
+            forecastTwoWind.textContent = "Wind: " + data.daily[3].wind_speed + " MPH";
+            forecastThreeWind.textContent = "Wind: " + data.daily[4].wind_speed + " MPH";
+            forecastFourWind.textContent = "Wind: " + data.daily[5].wind_speed + " MPH";
+            forecastZeroHumidity.textContent = "Humidity: " + data.daily[1].humidity + "%";
+            forecastOneHumidity.textContent = "Humidity: " + data.daily[2].humidity + "%";
+            forecastTwoHumidity.textContent = "Humidity: " + data.daily[3].humidity + "%";
+            forecastThreeHumidity.textContent = "Humidity: " + data.daily[4].humidity + "%";
+            forecastFourHumidity.textContent = "Humidity: " + data.daily[5].humidity + "%";
+            forecastZeroUv.textContent = "UV Index: " + data.daily[1].uvi
+            forecastOneUv.textContent = "UV Index: " + data.daily[2].uvi
+            forecastTwoUv.textContent = "UV Index: " + data.daily[3].uvi
+            forecastThreeUv.textContent = "UV Index: " + data.daily[4].uvi
+            forecastFourUv.textContent = "UV Index: " + data.daily[5].uvi
         })
     
 }
